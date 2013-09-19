@@ -14,3 +14,23 @@ Note that data is only sent from the server where there is a change in value.
 ![screenshot of visualisation](http://thestaticvoid.net/images/387t.png)
 
 The code is a very quick hack, but hopefully it's useful - if not at least for the realtime simple graphing, which I couldn't seem to find a decent implementation for.
+
+Installation
+------------
+
+Prereqs: Node, npm, Phidget daemon
+
+Use npm to grab all the Node stuff you need (run in source directory):
+
+    npm install
+
+From there, it's:
+
+    node app.js
+
+...to boot up the Node.js server.
+
+To view the visualisation, access:
+
+     http://localhost:4000
+

@@ -14,7 +14,7 @@ p.on('phidgetReady', function() {
 })
 p.on('changed', function(data) {
 	if (data.type == "RawSensor") return;
-	log("Change: " + JSON.stringify(data));
+	//log("Change: " + JSON.stringify(data));
 	io.sockets.emit("change", {id: id, data:data});
 	//io.sockets.emit("change-" + id, data);
 })
