@@ -9,6 +9,12 @@ var socket = io.connect(); //'http://localhost');
 var series = [];
 var bufferSize = 512;
 
+socket.on('connect', function() {
+	socket.emit('discover');
+})
+socket.on('onDiscover', function(data) {
+	console.dir(data);
+})
 socket.on('change', function (data) {
 	var d = data.data;
 	var index = parseInt(d.key);
@@ -22,7 +28,6 @@ socket.on('change', function (data) {
 	series[index].buffer = buffer;
 });
 
- 
 $(document).ready(function () {
 	for (var i=0;i<8; i++) {
 		var buffer = new Array(bufferSize);
@@ -71,7 +76,7 @@ function render() {
 		var bufferCopy = s.buffer.slice();
 	  	var scaleFactor = seriesHeight/(s.max-s.min);
 	  	context.fillStyle = "black";
-		var h = bufferCopy[bufferCopy.length-1] *scaleFactor;
+		var h = (bufferCopy[bufferCopy.length-1]-s.min) *scaleFactor;
 		context.fillRect(0, y-h, padding, h);
 		var x = padding;
 		var avg = bufferCopy[bufferCopy.length-1];
@@ -84,7 +89,7 @@ function render() {
 			if (bufferCopy[p] < 0) continue;
 			avg += bufferCopy[p];
 			counted++;
-			var h = bufferCopy[p]*scaleFactor;
+			var h = (bufferCopy[p]-s.min)*scaleFactor;
 			context.fillRect(x, y-h, 1, h);				
 		}
 		x = padding;

@@ -9,6 +9,7 @@
     "express": "3.2.1",
     "phidgetapi": "0.2.11",
     "socket.io": "0.9.16",
+    "johnny-five": "0.7.3",
     "jade": "*"
   }
 }

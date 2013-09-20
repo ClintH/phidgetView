@@ -31,7 +31,17 @@ server.listen(app.get('port'), function(){
   console.log('Phidget Viewer listening on port ' + app.get('port'));
 });
 
+// var PhidgetManager = require("./phidgets/manager");
+// var m = new PhidgetManager(this);
 
-GLOBAL.phidget = require('phidgetAPI').phidget;
-require("./interfacekit");
+// var InterfaceKit = require("./phidgets/interfacekit");
+// var ik = new InterfaceKit(this);
 
+var FirmataManger = require("./firmata/manager");
+var fm = new FirmataManger(this);
+
+io.sockets.on("connection", function(socket) {
+	socket.on("discover", function() {
+		//return m.discover(socket);
+	})
+});
